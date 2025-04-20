@@ -43,3 +43,17 @@ cd app
 ```bash
 adk web
 ```
+
+8. Open the ADK web UI:
+
+```bash
+open http://localhost:8000
+```
+
+9. Ask the agent to fetch some Datadog logs!
+
+Sample input:
+
+```
+Use the search logs tool to find recent logs for the service named “agi-house-hackathon-sample-server”
+```
