@@ -19,9 +19,9 @@ async def get_tools_async():
           args=[ "/Users/yizhenzhong/Documents/AI/agi_hackathon/mcp-server-datadog/build/index.js",
           ],
           env={
-              "DATADOG_APP_KEY": "44ff78f74586be29f41b592810fc7444e2968044",
-              "DATADOG_API_KEY": "869a92f90e5275d16854809c568f6c43",
-              "DATADOG_SITE": "datadoghq.eu"
+              "DATADOG_APP_KEY": os.getenv("DATADOG_APP_KEY"),
+              "DATADOG_API_KEY": os.getenv("DATADOG_API_KEY"),
+              "DATADOG_SITE": os.getenv("DATADOG_SITE")
           }
       )
       # For remote servers, you would use SseServerParams instead:
