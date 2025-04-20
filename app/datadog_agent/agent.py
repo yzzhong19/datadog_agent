@@ -16,7 +16,8 @@ async def get_tools_async():
       # Use StdioServerParameters for local process communication
       connection_params=StdioServerParameters(
           command='node',
-          args=[ "/Users/yizhenzhong/Documents/AI/agi_hackathon/mcp-server-datadog/build/index.js",
+          args=[
+            "/Users/sherwoodcallaway/code/agihouse-hackathon/datadog-mcp/build/index.js",
           ],
           env={
               "DATADOG_APP_KEY": os.getenv("DATADOG_APP_KEY"),
