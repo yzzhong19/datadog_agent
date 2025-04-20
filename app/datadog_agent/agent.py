@@ -11,16 +11,6 @@ from google.adk.artifacts.in_memory_artifact_service import InMemoryArtifactServ
 from google.adk.tools.mcp_tool.mcp_toolset import MCPToolset, SseServerParams, StdioServerParameters
 from google.adk.models.lite_llm import LiteLlm
 
-load_dotenv('../../.env')
-
-DATADOG_APP_KEY = os.getenv("DATADOG_APP_KEY")
-DATADOG_API_KEY = os.getenv("DATADOG_API_KEY")
-DATADOG_SITE = os.getenv("DATADOG_SITE")
-
-print(f"DATADOG_APP_KEY: {DATADOG_APP_KEY}")
-print(f"DATADOG_API_KEY: {DATADOG_API_KEY}")
-print(f"DATADOG_SITE: {DATADOG_SITE}")
-
 async def get_tools_async():
   """Gets tools from the MCP server."""
   print("Attempting to connect to MCP server...")
