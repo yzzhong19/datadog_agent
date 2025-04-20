@@ -1,38 +1,44 @@
+# Google ADK Datadog Agent
+
+## Description
+
+Example agent implemented using Google ADK. This agent has access to Datadog via an MCP server.
+
 ## Setup
 
 1. Get Datadog MCP server running: https://github.com/winor30/mcp-server-datadog.git
 
-2. Change into app directory:
-
-```bash
-cd app
-```
-
-3. Create your .env file:
+2. Create your .env file:
 
 ```bash
 cp .env.example .env
 ```
 
-4. Create virtual environment:
+3. Create virtual environment:
 
 ```bash
 python3 -m venv .venv
 ```
 
-5. Start virtual environment:
+4. Start virtual environment:
 
 ```bash
 source .venv/bin/activate
 ```
 
-6. Install dependencies:
+5. Install dependencies:
 
 ```bash
-pip install google-adk
+pip install -r requirements.txt
 ```
 
-7. Run app:
+6. Change into app directory:
+
+```bash
+cd app
+```
+
+7. Run Google ADK web server:
 
 ```bash
 adk web
