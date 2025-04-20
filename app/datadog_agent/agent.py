@@ -9,6 +9,7 @@ from google.adk.runners import Runner
 from google.adk.sessions import InMemorySessionService
 from google.adk.artifacts.in_memory_artifact_service import InMemoryArtifactService # Optional
 from google.adk.tools.mcp_tool.mcp_toolset import MCPToolset, SseServerParams, StdioServerParameters
+from google.adk.models.lite_llm import LiteLlm
 
 load_dotenv('../../.env')
 
@@ -46,7 +47,7 @@ async def create_agent():
   tools, exit_stack = await get_tools_async()
 
   agent = LlmAgent(
-      model='gemini-2.0-flash',
+      model=LiteLlm(model="anthropic/claude-3-5-sonnet-20240620"),
       name='datadog_agent',
       instruction='Datadog agent',
       tools=tools,
