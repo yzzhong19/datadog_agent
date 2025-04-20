@@ -1,5 +1,7 @@
 # agent.py (modify get_tools_async and other parts as needed)
+
 import asyncio
+import os
 from dotenv import load_dotenv
 from google.genai import types
 from google.adk.agents.llm_agent import LlmAgent
@@ -8,16 +10,18 @@ from google.adk.sessions import InMemorySessionService
 from google.adk.artifacts.in_memory_artifact_service import InMemoryArtifactService # Optional
 from google.adk.tools.mcp_tool.mcp_toolset import MCPToolset, SseServerParams, StdioServerParameters
 
-load_dotenv('../.env')
+load_dotenv('../../.env')
+
 async def get_tools_async():
-  """Gets tools from the File System MCP Server."""
-  print("Attempting to connect to MCP Filesystem server...")
+  """Gets tools from the MCP server."""
+  print("Attempting to connect to MCP server...")
+
   tools, exit_stack = await MCPToolset.from_server(
       # Use StdioServerParameters for local process communication
       connection_params=StdioServerParameters(
           command='node',
           args=[
-            "/Users/sherwoodcallaway/code/agihouse-hackathon/datadog-mcp/build/index.js",
+            "/Users/sherwoodcallaway/code/agihouse-hackathon/datadog-mcp/dist/index.js",
           ],
           env={
               "DATADOG_APP_KEY": os.getenv("DATADOG_APP_KEY"),
@@ -28,20 +32,24 @@ async def get_tools_async():
       # For remote servers, you would use SseServerParams instead:
       # connection_params=SseServerParams(url="http://remote-server:port/path", headers={...})
   )
-  print("MCP Toolset created successfully.")
+
+  print("MCP toolset created successfully")
+
   # MCP requires maintaining a connection to the local MCP Server.
   # exit_stack manages the cleanup of this connection.
   return tools, exit_stack
 
 async def create_agent():
-  """Gets tools from MCP Server."""
+  """Creates an agent with tools from MCP server."""
+
+  # Get tools from MCP server
   tools, exit_stack = await get_tools_async()
 
   agent = LlmAgent(
-      model='gemini-2.0-flash', # Adjust model name if needed based on availability
-      name='filesystem_assistant',
-      instruction='Datadog agent to help with monitoring and alerting.',
-      tools=tools, # Provide the MCP tools to the ADK agent
+      model='gemini-2.0-flash',
+      name='datadog_agent',
+      instruction='Datadog agent',
+      tools=tools,
   )
   return agent, exit_stack
 
